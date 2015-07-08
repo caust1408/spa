@@ -25,3 +25,15 @@ nav#side {
   height: 90%;
   background-color: #CCFF99;
 } 
+
+#calcButton {
+  font-size: 18px;
+}
+
+#clearButton {
+  font-size: 18px;
+}
+
+section {
+  font-size: 20px;
+}
