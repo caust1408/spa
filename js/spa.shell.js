@@ -9,16 +9,16 @@ spa.shell = (function () {
   var
     configMap = {
       main_html : String()
-            + '<main>'
-            + '<header><h1>Saint Joseph\'s College SPA Demo</h1></header>'
-        + '<nav id="side">'
+    + '<main>'
+      + '<header ><h1>SPA Demo</h1></header>'
+        + '<nav id="side" class="navbar navbar-default">'
         + '<h3>Nav Region</h3>'
-        + '<ul>'
-        + '<li><a id="date" href="/dates">Date calculator</a></li>'
-	+ '<li><a id="socket" href="/socket">Socket.io View</a></li>'
-	+ '<li>SEO link</li>'
-	+ '<li><a href=".">Reload</a><li'
-	+ '</ul></nav>'
+        + '<ul class="nav nav-pills nav-stacked">'
+          + '<li><a id="date" href="/dates">Date calculator</a></li>'
+	      + '<li><a id="socket" href="/socket">Socket.io View</a></li>'
+	      + '<li><a id="seo" href="/seo">SEO link</a></li>'
+	      + '<li><a href=".">Reload</a></li>'
+	    + '</ul></nav>'
         + '<section id="content">Feature Content Region</section>'
 	+ '</main>'
     },
@@ -60,6 +60,10 @@ spa.shell = (function () {
   function socket() {
     spa.socket.initModule(jqueryMap.$content);
     }
+  
+  function seo() {
+    spa.seo.initModule(jqueryMap.$content);
+    }
 
   // End DOM client-side router methods
 
@@ -94,6 +98,7 @@ spa.shell = (function () {
     page('/', index);
     page('/dates', dates);
     page('/socket', socket);
+    page('/seo', seo);
     page();
 
   };
