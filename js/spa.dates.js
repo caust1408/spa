@@ -10,20 +10,32 @@ spa.dates = (function () {
   var
     configMap = {
       main_html : String()
-      + '<section class ="dateCalc">'
-      + '<h4>Date Calculation Region</h4>'
-      + '<p><label for="finishDate">Finish Date</label>'
-      + ' <input type="date" id="finishDate" />'
-      + ' <p><label for="years">Years </label>'
-      + ' <input type="number" maxlength="3" id="years" /><br>'
-      + ' <label for="months">Months</label>'
-      + ' <input type="number" maxlength="2" id="months" /><br>'
-      + ' <label for="days">Days  </label>'
-      + ' <input type="number" maxlength="2" id="days" />'
-      + ' <br><input type="button" value="Calc" id="calcButton" />'
-      + ' <input type="button" value="Clear" id="clearButton" />'
-      + ' <div id="output">Start:</div>'
-      + ' </section>'
+
+
++'<section class="dateCalc">'
+   +'<h4>Date Calculation Region</h4>'
+   +'<div class="row">'
+      +'<div class="form-group col-sm-3">'
+         +'<label for="finishDate" class="control-label">Finish Date</label>'
+         +'<input class="form-control" type="date" id="finishDate" />'
+      +'</div>'
+      +'<div class="form-group col-sm-3">'
+         +'<label for="years" class="control-label">Years </label>'
+         +'<input class="form-control" type="number" maxlength="3" id="years" />'
+      +'</div>'
+      +'<div class="form-group col-sm-3">'
+         +'<label for="months" class="control-label">Months</label>'
+         +'<input class="form-control" type="number" maxlength="2" id="months" />'
+      +'</div>'
+      +'<div class="form-group col-sm-3">'
+         +'<label for="days" class="control-label">Days </label>'
+         +'<input class="form-control" type="number" maxlength="2" id="days" />'
+      +'</div>'
+   +'</div>'
+   +'<input class="btn btn-success btn-md" type="button" value="Calc" id="calcButton" />'
+   +'<input class="btn btn-danger btn-md" type="button" value="Clear" id="clearButton" />'
+   +'<div id="output">Start:</div>'
++'</section>'
     },
     stateMap = {
       $container  : undefined,
@@ -139,4 +151,4 @@ spa.dates = (function () {
 
   return { initModule : initModule };
   //------------------- END PUBLIC METHODS ---------------------
-}());
+})();
