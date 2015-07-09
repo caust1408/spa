@@ -34,6 +34,14 @@ configRoutes = function ( router, server ) {
     };
     res.sendFile('index.html', options);
   });
+  
+    router.get('/seo', function(req, res) {
+    var options = {
+      // I don't like this very much
+      root: __dirname + '/../html/'
+    };
+    res.sendFile('index.html', options);
+  });
 
 }; 
  
