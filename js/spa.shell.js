@@ -9,24 +9,26 @@ spa.shell = (function () {
   var
     configMap = {
       main_html : String()
-    + '<main>'
-      + '<header ><h1>SPA Demo</h1></header>'
-        + '<nav id="side" class="navbar navbar-default">'
-        + '<h3>Nav Region</h3>'
-        + '<ul class="nav nav-pills nav-stacked">'
-          + '<li><a id="date" href="/dates">Date calculator</a></li>'
-	      + '<li><a id="socket" href="/socket">Socket.io View</a></li>'
-	      + '<li><a id="seo" href="/seo">SEO link</a></li>'
-	      + '<li><a href=".">Reload</a></li>'
-	    + '</ul></nav>'
-        + '<section id="content">Feature Content Region</section>'
-	+ '</main>'
+            + '<main>'
+             + '<nav id="side" class="navbar navbar-default">'
+              + '<h3>Nav Region</h3>'
+              + '<ul class="nav nav-pills nav-stacked">'
+                + '<li><a id="date" href="/dates">Date calculator</a></li>'
+                + '<li><a id="socket" href="/socket">Socket.io View</a></li>'
+                + '<li><a id="seo" href="/seo">SEO link</a></li>'
+                + '<li><a href=".">Reload</a></li>'
+              + '</ul></nav>'
+              + '<section id="content-main">Feature Content Region</section>'
+              + '<section id="content-dates"></section>'
+              + '<section id="content-socket"></section>'
+              + '<section id="content-seo"></section>'
+	         + '</main>'
     },
     stateMap = {
       $container  : undefined,
     },
     jqueryMap = {},
-    initModule, copyAnchorMap, setJqueryMap, setClicks;
+    initModule, copyAnchorMap, setJqueryMap;
     
   //----------------- END MODULE SCOPE VARIABLES ---------------
 
@@ -42,7 +44,10 @@ spa.shell = (function () {
     jqueryMap = {
       $container : $container,
       $nav       : $container.find('#side'),
-      $content   : $container.find('#content'),
+      $content   : $container.find('#content-main'),
+      $dates     : $container.find('#content-dates'),
+      $socket    : $container.find('#content-socket'),
+      $seo       : $container.find('#content-seo')
     };
   };
   // End DOM method /setJqueryMap/
@@ -50,19 +55,25 @@ spa.shell = (function () {
   // Begin client-side router methods
 
   function index() {
-    initModule(stateMap.$container);
+    // This needs to be more sophisticated
+    //   i.e. what if we're leaving the socket module
+    jqueryMap.$dates.hide();
+    jqueryMap.$content.show();
     }
 
   function dates() {
-    spa.dates.initModule(jqueryMap.$content);
+    // Fragile div swap for testing
+    // Note this will FREAK if you come in via bookmark
+    jqueryMap.$content.hide();
+    spa.dates.postSection();
     }
 
   function socket() {
     spa.socket.initModule(jqueryMap.$content);
     }
-  
+
   function seo() {
-    spa.seo.initModule(jqueryMap.$content);
+    // Nothing going on here yet
     }
 
   // End DOM client-side router methods
@@ -93,6 +104,9 @@ spa.shell = (function () {
     stateMap.$container = $container;
     $container.html( configMap.main_html );
     setJqueryMap();
+
+    // Initialize module ONCE 
+    spa.dates.initModule(jqueryMap.$dates);
 
     // Set up routes
     page('/', index);
