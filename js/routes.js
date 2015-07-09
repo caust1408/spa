@@ -34,8 +34,8 @@ configRoutes = function ( router, server ) {
     };
     res.sendFile('index.html', options);
   });
-  
-    router.get('/seo', function(req, res) {
+
+  router.get('/socket', function(req, res) {
     var options = {
       // I don't like this very much
       root: __dirname + '/../html/'
