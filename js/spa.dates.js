@@ -31,7 +31,7 @@ spa.dates = (function () {
    +'</div>'
    +'<input class="btn btn-success btn-md" type="button" value="Calc" id="calcButton" />'
    +'<input class="btn btn-danger btn-md" type="button" value="Clear" id="clearButton" />'
-   +'<div id="output">Start:</div>'
+   +'<aside id="output">Target</aside>'
     },
     stateMap = {
       $container  : undefined,
@@ -40,7 +40,7 @@ spa.dates = (function () {
 
     // Local variables, both data and functions
     initModule, copyAnchorMap, setJqueryMap, setClicks,
-    calcStartYear, postSection;
+    calcStartYear, postSection, operation;
   //----------------- END MODULE SCOPE VARIABLES ---------------
 
   //------------------- BEGIN UTILITY METHODS ------------------
@@ -53,10 +53,10 @@ spa.dates = (function () {
 
     // Set initial jQuery map values
     jqueryMap = {
-      $container : $container,
+      $container  :  $container,
       $calcButton :  $container.find('#calcButton'),
-      $days :  $container.find('#days'),
-      $clear :  $container.find('#clearButton')
+      $days       :  $container.find('#days'),
+      $clear      :  $container.find('#clearButton')
     };
   };
   // End DOM method /setJqueryMap/
@@ -103,6 +103,16 @@ spa.dates = (function () {
         finish = moment(inputDate),
         // The start object begins the same as the finish
         start = moment(finish);
+      
+              // Which operation--add or subtract?
+        // Note: fix by putting into jqueryMap if we can
+        operation =  $('input[name=opcode]:checked').val();
+        // Is this the best way to do it?
+        if (operation === 'add') {
+          elapsedYears = -(elapsedYears);
+          elapsedMonths = -(elapsedMonths);
+          elapsedDays = -(elapsedDays);
+          }
 
         // Subtract each piece from the finish time to mutate the start
         start.subtract(elapsedYears, 'years').subtract(elapsedMonths, 'months').subtract(elapsedDays, 'days'); 
@@ -123,6 +133,17 @@ spa.dates = (function () {
         elapsedDays = $('#days').val(),
         finish = moment(inputDate),
         start = moment(finish);
+        
+                // Which operation--add or subtract?
+        // Note: fix by putting into jqueryMap if we can
+        operation =  $('input[name=opcode]:checked').val();
+
+        // Is this the best way to do it?
+        if (operation === 'add') {
+          elapsedYears = -(elapsedYears);
+          elapsedMonths = -(elapsedMonths);
+          elapsedDays = -(elapsedDays);
+          }
 
         start.subtract(elapsedYears, 'years').subtract(elapsedMonths, 'months').subtract(elapsedDays, 'days');
       $('#output').html('Birth: ' + start.format("dddd, MMMM Do YYYY"));
