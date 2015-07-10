@@ -2,9 +2,11 @@
 Sandbox for OSCON SPA app
 
 For prerender:
-  npm install 
-  go into prerender file
-  type: 'node server.js'
+  git clone https://github.com/prerender/prerender.git
+  cd prerender
+  npm install
+  node server.js
+
   then start app.js in new window
   then in another window type: curl http://localhost:8000/dates
   then type: 
