@@ -86,6 +86,7 @@ spa.shell = (function () {
         if (currentMod != jqueryMap.$seo)
           currentMod.hide()
         currentMod = jqueryMap.$seo;
+       spa.seo.initModule(jqueryMap.$seo);
         // Nothing going on here yet
     }
 
