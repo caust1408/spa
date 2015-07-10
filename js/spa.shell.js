@@ -29,7 +29,7 @@ spa.shell = (function () {
       $container  : undefined,
     },
     jqueryMap = {},
-    initModule, copyAnchorMap, setJqueryMap;
+    initModule, copyAnchorMap, setJqueryMap,currentMod;
     
   //----------------- END MODULE SCOPE VARIABLES ---------------
 
@@ -40,6 +40,7 @@ spa.shell = (function () {
   // Begin DOM method /setJqueryMap/
   setJqueryMap = function () {
     var $container = stateMap.$container;
+    
 
     // Only three regions for now
     jqueryMap = {
@@ -58,23 +59,34 @@ spa.shell = (function () {
   function index() {
     // This needs to be more sophisticated
     //   i.e. what if we're leaving the socket module
-    jqueryMap.$dates.hide();
+    currentMod.hide();
+    currentMod = jqueryMap.$content; 
     jqueryMap.$content.show();
     }
 
   function dates() {
-    // Fragile div swap for testing
-    // Note this will FREAK if you come in via bookmark
-    jqueryMap.$content.hide();
+// Don't be bad if user keeps clicking same menu choice
+    if( currentMod != jqueryMap.$dates ) 
+	currentMod.hide();
+    // Remember where we're at
+    currentMod = jqueryMap.$dates;
     spa.dates.postSection();
     }
 
   function socket() {
-    spa.socket.initModule(jqueryMap.$content);
+    if( currentMod != jqueryMap.$socket )
+      currentMod.hide();
+    currentMod = jqueryMap.$socket
+    // This changes once Nathan is ready 
+    spa.socket.initModule(jqueryMap.$socket);
     }
 
   function seo() {
     // Nothing going on here yet
+        if (currentMod != jqueryMap.$seo)
+          currentMod.hide()
+        currentMod = jqueryMap.$seo;
+        // Nothing going on here yet
     }
 
   // End DOM client-side router methods
@@ -102,12 +114,17 @@ spa.shell = (function () {
   // Throws    : none
   initModule = function ( $container ) {
     // load HTML and map jQuery collections
+     
     stateMap.$container = $container;
     $container.html( configMap.main_html );
     setJqueryMap();
 
     // Initialize module ONCE 
     spa.dates.initModule(jqueryMap.$dates);
+    jqueryMap.$socket.hide();
+    jqueryMap.$seo.hide();
+    
+    currentMod = jqueryMap.$content;
 
     // Set up routes
     page('/', index);
