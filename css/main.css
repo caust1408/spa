@@ -17,10 +17,19 @@ nav#side {
  height: 100%;
  overflow-y: auto;
  text-align: top;
- background-color:  #FFFF66;
+ background-color:  #FFFF47;
  border-radius: 5px;
 }
 
+#content-dates {
+  background-color: #CCFF33;
+}
+
+#content-dates #output {
+  width: 75%;
+  font-size: 125%;
+  background-color: #FF3300;
+}
 
 #calcButton {
   font-size: 18px;
