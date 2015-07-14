@@ -1,44 +1,45 @@
 header {
- height: 10%;
- background-color: #1FFFF0;
+  height: 10%;
+  background-color: #1FFFF0;
+}
+
+.calcButton , .clearButton{
+  padding: 10px 25px;
 }
 
 nav#side {
- background-color: #ADADAD;
- float: left;
- width: 28%;
- height: 100%;
- margin: 1%;
+  background-color: #ADADAD;
+  float: left;
+  width: 28%;
+  height: 100%;
+  margin: 1%;
 }
 
 #content-main, #content-dates, #content-socket, #content-seo {
- margin: 1%;
- padding: 2%;
- height: 100%;
- overflow-y: auto;
- text-align: top;
- background-color:  #FFFF47;
- border-radius: 5px;
+  margin: 1%;
+  padding: 2%;
+  height: 100%;
+  overflow-y: auto;
+  text-align: top;
+  background-color:  #FFFF47;
+  border-radius: 5px;
 }
 
-#content-dates {
+#content-dates #genericDate {
   background-color: #CCFF33;
 }
 
-#content-dates #output {
+#content-dates #cemeteryDate {
+  background-color: #CC6699
+}
+
+#content-dates .output {
   width: 75%;
   font-size: 125%;
-  background-color: #FF3300;
+  background-color: #FF6666;
 }
 
-#calcButton {
-  font-size: 18px;
+.calcnclear {
+  display: inline-block;
 }
 
-#clearButton {
-  font-size: 18px;
-}
-
-section {
-  font-size: 20px;
-}
