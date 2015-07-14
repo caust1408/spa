@@ -9,7 +9,6 @@ spa.shell = (function () {
   var
     configMap = {
       main_html : String()
-    + '<main>'
       + '<header><h1>SPA Demo</h1></header>'
         + '<nav id="side" class="navbar navbar-default">'
         + '<h3>Nav Region</h3>'
@@ -29,8 +28,9 @@ spa.shell = (function () {
       $container  : undefined,
     },
     jqueryMap = {},
-    initModule, copyAnchorMap, setJqueryMap,currentMod;
-    
+
+    initModule, setJqueryMap,
+    currentMod;    
   //----------------- END MODULE SCOPE VARIABLES ---------------
 
   //------------------- BEGIN UTILITY METHODS ------------------
@@ -40,7 +40,6 @@ spa.shell = (function () {
   // Begin DOM method /setJqueryMap/
   setJqueryMap = function () {
     var $container = stateMap.$container;
-    
 
     // Only three regions for now
     jqueryMap = {
@@ -56,16 +55,16 @@ spa.shell = (function () {
 
   // Begin client-side router methods
 
+  // Base route 
   function index() {
-    // This needs to be more sophisticated
-    //   i.e. what if we're leaving the socket module
     currentMod.hide();
     currentMod = jqueryMap.$content; 
     jqueryMap.$content.show();
     }
 
-  function dates() {
-// Don't be bad if user keeps clicking same menu choice
+  // One function per feature module
+  function dates() { 
+    // Don't be bad if user keeps clicking same menu choice
     if( currentMod != jqueryMap.$dates ) 
 	currentMod.hide();
     // Remember where we're at
@@ -82,12 +81,10 @@ spa.shell = (function () {
     }
 
   function seo() {
+    if( currentMod != jqueryMap.$seo )
+      currentMod.hide()
+    currentMod = jqueryMap.$seo;
     // Nothing going on here yet
-        if (currentMod != jqueryMap.$seo)
-          currentMod.hide()
-        currentMod = jqueryMap.$seo;
-       spa.seo.initModule(jqueryMap.$seo);
-        // Nothing going on here yet
     }
 
   // End DOM client-side router methods
@@ -98,34 +95,24 @@ spa.shell = (function () {
   //-------------------- END EVENT HANDLERS --------------------
 
   //------------------- BEGIN PUBLIC METHODS -------------------
+
   // Begin Public method /initModule/
-  // Example   : spa.shell.initModule( $('#app_div_id') );
-  // Purpose   :
-  //   Directs the Shell to offer its capability to the user
-  // Arguments :
-  //   * $container (example: $('#app_div_id')).
-  //     A jQuery collection that should represent 
-  //     a single DOM container
-  // Action    :
-  //   Populates $container with the shell of the UI
-  //   and then configures and initializes feature modules.
-  //   The Shell is also responsible for browser-wide issues
-  //   such as URI anchor and cookie management
-  // Returns   : none 
-  // Throws    : none
   initModule = function ( $container ) {
     // load HTML and map jQuery collections
-     
     stateMap.$container = $container;
     $container.html( configMap.main_html );
+
+    // Keep track of our elements
     setJqueryMap();
 
-    // Initialize module ONCE 
+    // Initialize each feature module
     spa.dates.initModule(jqueryMap.$dates);
-    spa.socket.initModule(jqueryMap.$socket);
     jqueryMap.$socket.hide();
     jqueryMap.$seo.hide();
-    
+    // spa.socket.initModule(jqueryMap.$socket);
+    // spa.seo.initModule(jqueryMap.$seo);
+
+    // Default content is "home" screen
     currentMod = jqueryMap.$content;
 
     // Set up routes
@@ -136,6 +123,8 @@ spa.shell = (function () {
     page();
 
   };
+
+  // Public API
   return { initModule : initModule };
   //------------------- END PUBLIC METHODS ---------------------
 }());
