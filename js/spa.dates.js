@@ -61,7 +61,7 @@ spa.dates = (function () {
       cemetery_html: String()
       +'<h3>Cemetery Date View</h3>'
       +'<div class="row">'
-         +'<div class="form-group col-md-2 col-xs-8">'
+         +'<div class="form-group col-md-2 col-xs-9">'
             +'<label class="control-label" for="finishDate">Death Date</label>'
             +'<input type="date" class="form-control finishDate" />'
          +'</div>'
