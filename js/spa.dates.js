@@ -10,8 +10,8 @@ spa.dates = (function () {
   var
     configMap = {
       main_html : String()
-      + ' <h4>Date Calculation Region</h4>'
-      + ' <input type="button" class="btn btn-default" value="Show Cemetery View" id="toggleButton" />'
+      + ' <label class="datecalc">Date Calculation Region'
+      + ' <input type="button" class="btn btn-default" value="Show Cemetery View" id="toggleButton" /></label>'
       + ' <section id="genericDate"></section>'
       + ' <section id="cemeteryDate"></section>'
       ,
@@ -19,7 +19,7 @@ spa.dates = (function () {
       generic_html: String()
       +'<h3>Generic Date View</h3>'
       +'<div class="row">'
-         +'<div class="form-group col-md-2 col-xs-6">'
+         +'<div class="form-group col-md-2 col-xs-8">'
             +'<label class="control-label" for="startDate">Start</label>'
 
             +'<input class="form-control" type="date" id="startDate" />'
@@ -27,7 +27,7 @@ spa.dates = (function () {
             +'<label class="control-label" for="finishDate">End <b>(Date of interest)</b></label>'
             +'<input class="form-control finishDate" type="date" />'
          +'</div>'
-         +'<div class="form-group col-md-2 col-xs-6">'
+         +'<div class="form-group col-md-2 col-xs-4">'
             +'<label class="control-label" for="years">Years </label>'
             +'<input class="form-control years" type="number" maxlength="3" />'
             +'<br/>'
@@ -62,12 +62,12 @@ spa.dates = (function () {
       cemetery_html: String()
       +'<h3>Cemetery Date View</h3>'
       +'<div class="row">'
-         +'<div class="form-group col-md-2 col-xs-6">'
+         +'<div class="form-group col-md-2 col-xs-8">'
             +'<label class="control-label" for="finishDate">Death Date</label>'
             +'<input type="date" class="form-control" />'
          +'</div>'
 
-         +'<div class="form-group col-md-2 col-xs-6">'
+         +'<div class="form-group col-md-2 col-xs-4">'
             +'<label class="control-label" for="years">Years </label>'
             +'<input type="number" maxlength="3" class="form-control years" />'
             +'<br/>'
@@ -88,10 +88,13 @@ spa.dates = (function () {
             +'</div>'
          +'</div>'
       +'</div>'
+      
+      
 
       +'<input type="button" value="Calc" class="btn btn-success btn-lg calcButton" />'
       +'<input type="button" value="Clear" class="btn btn-danger btn-lg clearButton" />'
       +'<aside class="output">Target:</aside>'
+      +'<br/>'
       },
 
     stateMap = {
