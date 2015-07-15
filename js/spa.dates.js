@@ -10,8 +10,8 @@ spa.dates = (function () {
   var
     configMap = {
       main_html : String()
-      + ' <label class="datecalc">Date Calculation Region'
-      + ' <input type="button" class="btn btn-default" value="Show Cemetery View" id="toggleButton" /></label>'
+      + ' <h4 class="datecalc">Date Calculation Region </h4>'
+      + ' <input type="button" class="btn btn-default" value="Show Cemetery View" id="toggleButton" />'
       + ' <section id="genericDate"></section>'
       + ' <section id="cemeteryDate"></section>'
       ,
@@ -40,11 +40,11 @@ spa.dates = (function () {
                +'<input class="form-control days" type="number" maxlength="2"  />'
               
                +'<label class="radio-inline" for="radio1">'
-                  +'<input class="radio" type="radio" name="gen_opcode" id="gen_opcode" value="add">Add'
+                  +'<input class="radio" type="radio" name="gen_whichOp" id="gen_opcode" value="add">Add'
                +'</label>'
                +'<br/>'
                +'<label class="radio-inline" for="radio2">'
-                  +'<input class="radio" type="radio" name="gen_opcode" value="sub" checked>Subtract'
+                  +'<input class="radio" type="radio" name="gen_whichOp" value="sub" checked>Subtract'
                +'</label>'
                
             +'</div>'
@@ -56,7 +56,6 @@ spa.dates = (function () {
          +'<input type="button" value="Clear" class="btn btn-danger btn-lg clearButton" id="clearButton" />'
          +'<aside class="output">Target:</aside>'
       +'<br/>'
-      
       ,
 
       cemetery_html: String()
@@ -64,7 +63,7 @@ spa.dates = (function () {
       +'<div class="row">'
          +'<div class="form-group col-md-2 col-xs-8">'
             +'<label class="control-label" for="finishDate">Death Date</label>'
-            +'<input type="date" class="form-control" />'
+            +'<input type="date" class="form-control finishDate" />'
          +'</div>'
 
          +'<div class="form-group col-md-2 col-xs-8">'
@@ -79,11 +78,11 @@ spa.dates = (function () {
                +'<input type="number" maxlength="2" class="form-control days" />'
 
                +'<label class="radio-inline" for="radio1">'
-                  +'<input type="radio" name="cem_whichOp" value="sub" > Add'
+                  +'<input type="radio" class="add" name="cem_whichOp" value="add" > Add'
                +'</label>'
                +'<br/>'
                +'<label class="radio-inline" for="radio2">'
-                  +'<input type="radio" name="cem_whichOp" value="add" checked> Subtract'
+                  +'<input type="radio" class="add" name="cem_whichOp" value="sub" id="cem_default" checked> Subtract'
                +'</label>'
             +'</div>'
          +'</div>'
@@ -134,16 +133,26 @@ spa.dates = (function () {
       later = moment(jqueryMap.$container.find('.finishDate').val()),
 
       // Calculate duration
-      duration = (moment.duration(later.diff(earlier)).format("Y M D")),
+      duration = (moment.duration(later.diff(earlier)).format("Y[y] M[m] D[d]")),
       // Use regex to extract years, months, and days
-      matchString = /(\d+) (\d+) (\d+)/,
-      match = matchString.exec(duration);
+      matchString = /((\d+)y )*((\d+)m )*((\d+)d)*/,
+      match = matchString.exec(duration),
+      yrs, mos, days;
 
-      // Put them into input/display widgets
-      jqueryMap.$generic.find('.years').val(match[1]);
-      jqueryMap.$generic.find('.months').val(match[2]);
-      jqueryMap.$generic.find('.days').val(match[3]);
-  } // end /dateSpan
+    // Put them into input/display widgets
+    // Set field values 
+    yrs = (match[2])?match[2]:'';
+     console.log(yrs);
+
+    mos = (match[4])?match[4]:'';
+     console.log(mos);
+    days = (match[6])?match[6]:'';
+     console.log(days);
+    // Write them into boxes
+    jqueryMap.$generic.find('.years').val(yrs);
+    jqueryMap.$generic.find('.months').val(mos);
+    jqueryMap.$generic.find('.days').val(days);
+    } // end /dateSpan
 
   //-------------------- END UTILITY METHODS -------------------
 
@@ -197,13 +206,26 @@ spa.dates = (function () {
     timespanMap.years = $(container.find('.years')).val();
     timespanMap.months = $(container.find('.months')).val();
     timespanMap.days = $(container.find('.days')).val();
+   
 
 
-    // Add or subtract according to opcode value (add/sub)
+    // Add or subtract according to whichOp value (add/sub)
     doDateCalc(start, operation);
     // Write it to output
     $(container.find('.output')).html('Target: ' + start.format("dddd, MMMM Do YYYY"));
   } // end updateForm
+
+  // Begin event handler /clear/
+  function clear(container) { 
+    container.find('.finishDate').val('');
+    // container.find('#startDate').val('');
+    container.find('.years').val('');
+    // $('#genericDate.years').val('');
+    container.find('.months').val('');
+    container.find('.days').val('');
+    // $('#genericDate.days').val('');
+    $('#gen_default').prop('checked', true);
+    } // end /clear/ 
 
   //-------------------- END EVENT HANDLERS --------------------
 
@@ -266,20 +288,14 @@ spa.dates = (function () {
 
     // Clear input fields on clear button click
     jqueryMap.$genClear.click(function() {
-      $('.finishDate').val('');
+      clear(jqueryMap.$generic);
       $('#startDate').val('');
-      $('.years').val('');
-      $('.months').val('');
-      $('.days').val('');
-      // Also need to reset to subtract at this point
+      $('#gen_default').prop('checked', true);
     });
 
     jqueryMap.$cemClear.click(function() {
-      $('.finishDate').val('');
-      $('.years').val('');
-      $('.months').val('');
-      $('.days').val('');
-      // Also need to reset to subtract at this point
+      clear(jqueryMap.$cemetery);
+      $('#cem_default').prop('checked', true);
     }); // End handlers for Clear button pressed
 
     // Begin handler for view toggle button
@@ -313,7 +329,7 @@ spa.dates = (function () {
       jqueryMap.$cemetery.show();
     }
   jqueryMap.$container.show();
-  } // end postSectionhttp://localhost:8000/dates
+  } // end postSection
 
   return { initModule : initModule, 
            postSection : postSection
