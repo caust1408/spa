@@ -12,7 +12,7 @@ spa.shell = (function () {
       +'<main>'
    +'<nav class="navbar navbar-default" role="navigation">'
    +'<div class="navbar-header">'
-   +'<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">'
+   +'<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNav">'
       +'<span class="sr-only">Toggle navigation</span>'
       +'<span class="icon-bar"></span>'
       +'<span class="icon-bar"></span>'
@@ -21,14 +21,14 @@ spa.shell = (function () {
    +'<a class="navbar-brand" href="/">SPA Demo</a>'
    +'</div>'
    
-   +'<div class="collapse navbar-collapse" id="example-navbar-collapse">'
+   +'<div class="collapse navbar-collapse" id="topNav">'
       +'<ul class="nav navbar-nav">'
          +'<li class="active"><a href="/">Home</a></li>'
          +'<li><a id="date" href="/dates">Date calculator</a></li>'
         +'<li><a id="socket" href="/socket">Socket.io View</a></li>'
          +'<li><a id="seo" href="/seo">SEO link</a></li>'
       +'</ul>'
-      +'<ul class="dropdown-menu">'
+      +'<ul class="dropdown-menu" id="dropNav">'
          +'<li class="active"><a href="/">Home</a></li>'
          +'<li><a href="/">Home</a></li>'
          +'<li><a id="date" href="/dates">Date calculator</a></li>'
@@ -152,6 +152,11 @@ spa.shell = (function () {
 
     // Default content is "home" screen
     currentMod = jqueryMap.$content;
+    
+$('.nav li a').on('click', function() {
+    $(this).parent().parent().find('.active').removeClass('active');
+    $(this).parent().addClass('active').css('font-weight', 'bold');
+});
 
     // Set up routes
     page('/', index);
