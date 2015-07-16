@@ -10,6 +10,41 @@ spa.shell = (function () {
     configMap = {
       main_html : String()
       +'<main>'
+   +'<nav class="navbar navbar-default" role="navigation">'
+   +'<div class="navbar-header">'
+   +'<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">'
+      +'<span class="sr-only">Toggle navigation</span>'
+      +'<span class="icon-bar"></span>'
+      +'<span class="icon-bar"></span>'
+      +'<span class="icon-bar"></span>'
+   +'</button>'
+   +'<a class="navbar-brand" href="/">SPA Demo</a>'
+   +'</div>'
+   
+   +'<div class="collapse navbar-collapse" id="example-navbar-collapse">'
+      +'<ul class="nav navbar-nav">'
+         +'<li class="active"><a href="/">Home</a></li>'
+         +'<li><a id="date" href="/dates">Date calculator</a></li>'
+        +'<li><a id="socket" href="/socket">Socket.io View</a></li>'
+         +'<li><a id="seo" href="/seo">SEO link</a></li>'
+      +'</ul>'
+      +'<ul class="dropdown-menu">'
+         +'<li class="active"><a href="/">Home</a></li>'
+         +'<li><a href="/">Home</a></li>'
+         +'<li><a id="date" href="/dates">Date calculator</a></li>'
+         +'<li><a id="socket" href="/socket">Socket.io View</a></li>'
+         +'<li><a id="seo" href="/seo">SEO link</a></li>'
+      +'</ul>'
+   +'</div>'
+   +'</nav>'
+             + '<section id="content-main">Feature Content Region</section>'
+      	+ '<section id="content-dates"></section>'
+	    + '<section id="content-socket"></section>'
+	    + '<section id="content-seo"></section>'
++'</main>'
+      
+      
+      /*+'<main>'
       + '<nav class="navbar navbar-default " id="topNav">'
           + '<a class="navbar-brand" href="/">SPA Demo</a></nav>'
         + '<nav id="side" class="navbar navbar-default">'
@@ -25,7 +60,7 @@ spa.shell = (function () {
       	+ '<section id="content-dates"></section>'
 	    + '<section id="content-socket"></section>'
 	    + '<section id="content-seo"></section>'
-	+ '</main>'
+	+ '</main>'*/
     },
     stateMap = {
       $container  : undefined,
