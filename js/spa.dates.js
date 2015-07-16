@@ -19,7 +19,7 @@ spa.dates = (function () {
       generic_html: String()
       +'<h3>Generic Date View</h3>'
       +'<div class="row">'
-         +'<div class="form-group col-md-2 col-xs-8">'
+         +'<div class="form-group col-md-3 col-xs-8">'
             +'<label class="control-label" for="startDate">Start</label>'
 
             +'<input class="form-control" type="date" id="startDate" />'
@@ -27,7 +27,7 @@ spa.dates = (function () {
             +'<label class="control-label" for="finishDate">End <b>(Date of interest)</b></label>'
             +'<input class="form-control finishDate" type="date" />'
          +'</div>'
-         +'<div class="form-group col-md-2 col-xs-8">'
+         +'<div class="form-group col-md-3 col-xs-8 col-sm-4">'
             +'<label class="control-label" for="years">Years </label>'
             +'<input class="form-control years" type="number" maxlength="3" />'
             +'<br/>'
@@ -61,12 +61,13 @@ spa.dates = (function () {
       cemetery_html: String()
       +'<h3>Cemetery Date View</h3>'
       +'<div class="row">'
-         +'<div class="form-group col-md-2 col-xs-9">'
+         +'<div class="form-group col-md-3 col-xs-8">'
             +'<label class="control-label" for="finishDate">Death Date</label>'
+      +'<br/>'
             +'<input type="date" class="form-control finishDate" />'
          +'</div>'
 
-         +'<div class="form-group col-md-2 col-xs-8">'
+         +'<div class="form-group col-md-3 col-xs-8">'
             +'<label class="control-label" for="years">Years </label>'
             +'<input type="number" maxlength="3" class="form-control years" />'
             +'<br/>'
