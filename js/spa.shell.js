@@ -32,7 +32,7 @@ spa.shell = (function () {
       +'<li><a href="/">Home</a></li>'
       +'<li><a href="/dates">Date Calculator</a></li>'
       +'<li><a href="/socket">Socket.io View</a></li>'
-      +'<li><a href="/seo">SEO link</a></li>'
+      +'<li><a href="/seo" rel="nofollow">SEO link</a></li>'
       +'<li id="signUp"><a href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>'
       +'<li id="logIn"><a href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>'
       +'</ul>'
