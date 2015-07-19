@@ -109,7 +109,7 @@ spa.shell = (function () {
     if( currentMod != jqueryMap.$seo )
       currentMod.hide()
     currentMod = jqueryMap.$seo;
-    // Nothing going on here yet
+    spa.seo.postSection();
     }
   
 
