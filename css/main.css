@@ -2,12 +2,11 @@ body {
     background:  #92dce0 !important;
 }
 
-
 #topNav {
-  
   background-color: #92dce0;
   border-color:  #92dce0 !important;
 }
+
 .navbar-brand {
   font-size: 30px !important;
 }
@@ -20,20 +19,12 @@ header {
 .calcButton , .clearButton{
     padding: 10px 25px;
     display: inline-block;
-/*    background-color: white !important;
-    border: blue !important;
-    color: blue !important;*/
 }
 
-/*.calcButton:hover , .clearButton:hover {
-     background-color: #346392 !important;
-    text-shadow: -1px 1px #27496d;
-}*/
-
-nav#side {
+#side {
   background-color: #b5b5b5;
   float: left;
-  width: 25%;
+  width: 100%;
   height: 100%;
   margin: .5%;
   border-color: #92dce0;
@@ -41,9 +32,9 @@ nav#side {
 
 #content-main, #content-dates, #content-socket, #content-seo {
   margin: .5%;
-  padding: 2%;
+  padding: .2%;
   height: 100%;
-  overflow-y: auto;
+  overflow-y: hidden;
   text-align: top;
   background-color:  #7f909a;
   border-radius: 10px;
@@ -100,6 +91,12 @@ box-shadow:         0px 11px 25px rgba(50, 50, 50, 0.75);
 label.datecalc {
   
   font-size: 25px;
+}
+
+@media (min-width: 768px) and (max-width: 1000px) {
+   .collapse {
+       display: none !important;
+   }
 }
 
 
