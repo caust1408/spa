@@ -13,7 +13,7 @@ spa.seo = (function () {
       + '</br>'
          + ' Make sure the prerender server is running'
       + '</br>'
-      + '<a id="seoLink" href="http://localhost:3000/http://localhost:8000/dates/?_escaped_fragment_=">The Solution</a>'
+      + '<a id="seoLink" href="http://localhost:3000/http://localhost:8000/dates/?_escaped_fragment_=" rel="nofollow">The Solution</a>'
       + '</section>'
    
     },
