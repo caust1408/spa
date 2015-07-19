@@ -35,7 +35,6 @@ spa.dates = (function () {
             +'<input class="form-control months" type="number" maxlength="2"  />'
             +'<br/>'
             +'<div class="form-group col-md-13 col-xs-13">'
-
                +'<label class="control-label" for="days">Days </label>'
                +'<input class="form-control days" type="number" maxlength="2"  />'
               
@@ -143,12 +142,8 @@ spa.dates = (function () {
     // Put them into input/display widgets
     // Set field values 
     yrs = (match[2])?match[2]:'';
-     console.log(yrs);
-
     mos = (match[4])?match[4]:'';
-     console.log(mos);
     days = (match[6])?match[6]:'';
-     console.log(days);
     // Write them into boxes
     jqueryMap.$generic.find('.years').val(yrs);
     jqueryMap.$generic.find('.months').val(mos);
@@ -173,8 +168,10 @@ spa.dates = (function () {
       // We need one of each of these per view container
       $genCalcButton : $container.find('#genericDate').find('.calcButton'),
       $cemCalcButton : $container.find('#cemeteryDate').find('.calcButton'),
+
       $genDays       : $container.find('#genericDate').find('.days'),
       $cemDays       : $container.find('#cemeteryDate').find('.days'),
+
       $genClear      : $container.find('#genericDate').find('.clearButton'),
       $cemClear      : $container.find('#cemeteryDate').find('.clearButton')
     };
@@ -207,7 +204,6 @@ spa.dates = (function () {
     timespanMap.years = $(container.find('.years')).val();
     timespanMap.months = $(container.find('.months')).val();
     timespanMap.days = $(container.find('.days')).val();
-   
 
 
     // Add or subtract according to whichOp value (add/sub)
@@ -219,12 +215,10 @@ spa.dates = (function () {
   // Begin event handler /clear/
   function clear(container) { 
     container.find('.finishDate').val('');
-    // container.find('#startDate').val('');
     container.find('.years').val('');
-    // $('#genericDate.years').val('');
     container.find('.months').val('');
     container.find('.days').val('');
-    // $('#genericDate.days').val('');
+    // Reset "sub" as default operation
     $('#gen_default').prop('checked', true);
     } // end /clear/ 
 
@@ -309,13 +303,6 @@ spa.dates = (function () {
       //Swap actual section contents
       swapSection();
     }); // End handler for view toggle button
-
-
-    // Test moment library functions by showing my age
-    var now = moment(),
-      startday = moment('1951-02-20');
-    jqueryMap.$container.append('<br>Date now: ' 
-      + now.format("dddd, MMMM Do YYYY"));
  } // End public method /initModule
 
   // Begin method /postSection/
