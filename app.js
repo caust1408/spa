@@ -28,7 +28,7 @@ var
 
 // ------------- BEGIN SERVER CONFIGURATION ---------------
   // tells the application to prerender at this url
-  //app.use(require('prerender-node').set('prerenderServiceUrl', 'http://localhost:3000/').set('prerenderToken', 'KpWv54ERZuWdTbB3DO5e'));
+  app.use(require('prerender-node').set('prerenderServiceUrl', 'http://localhost:3000/').set('prerenderToken', 'KpWv54ERZuWdTbB3DO5e'));
   app.use( express.static( __dirname + '' ) );
   app.use( bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
