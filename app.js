@@ -21,13 +21,14 @@ var
   app     = express(),
   router = express.Router(),
   routes = require('./js/routes.js'),
-  server  = http.createServer( app );
+  server  = http.createServer( app ),
+  io = require('socket.io').listen(server);
 
 // ------------- END MODULE SCOPE VARIABLES ---------------
 
 // ------------- BEGIN SERVER CONFIGURATION ---------------
   // tells the application to prerender at this url
-  app.use(require('prerender-node').set('prerenderServiceUrl', 'http://localhost:3000/').set('prerenderToken', 'KpWv54ERZuWdTbB3DO5e'));
+  //app.use(require('prerender-node').set('prerenderServiceUrl', 'http://localhost:3000/').set('prerenderToken', 'KpWv54ERZuWdTbB3DO5e'));
   app.use( express.static( __dirname + '' ) );
   app.use( bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
@@ -36,6 +37,17 @@ var
   // app.use(morgan('combined'));
   routes.configRoutes( router, server );
   app.use('/', router);
+
+  // Socket.IO Functions
+  app.get('/', function(req, res){
+      res.sendFile(__dirname + './html/index.html');
+  });
+
+  io.on('connection', function(socket){
+    socket.on('chat message', function(msg){
+      io.emit('chat message', msg);
+    });
+  });
 // -------------- END SERVER CONFIGURATION ----------------
 
 // ----------------- BEGIN START SERVER -------------------
