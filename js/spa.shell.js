@@ -10,69 +10,54 @@ spa.shell = (function () {
     configMap = {
       main_html : String()
       +'<main>'
-   +'<nav class="navbar navbar-default" role="navigation">'
-   +'<div class="navbar-header">'
-   +'<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNav">'
+      
+      +'<nav class="navbar navbar-default" role="navigation" >'
+      +'<div class="navbar-header">'
+      +'<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">'
       +'<span class="sr-only">Toggle navigation</span>'
       +'<span class="icon-bar"></span>'
       +'<span class="icon-bar"></span>'
       +'<span class="icon-bar"></span>'
-   +'</button>'
-   +'<a class="navbar-brand" href="/">SPA Demo</a>'
-   +'</div>'
-   
-   +'<div class="collapse navbar-collapse" id="topNav">'
-      +'<ul class="nav navbar-nav">'
-         +'<li class="active"><a href="/">Home</a></li>'
-         +'<li><a id="date" href="/dates">Date calculator</a></li>'
-        +'<li><a id="socket" href="/socket">Socket.io View</a></li>'
-         +'<li><a id="seo" href="/seo">SEO link</a></li>'
+      +'</button>'
+      +'<a class="navbar-brand" href="/">SPA Demo</a>'
+      +'</div>'
+      +'<ul class="nav navbar-nav navbar-right" id="logs">'
+      +'<li id="sign"><a href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>'
+      +'<li id="log"><a href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>'
       +'</ul>'
-      +'<ul class="dropdown-menu" id="dropNav">'
-         +'<li class="active"><a href="/">Home</a></li>'
-         +'<li><a href="/">Home</a></li>'
-         +'<li><a id="date" href="/dates">Date calculator</a></li>'
-         +'<li><a id="socket" href="/socket">Socket.io View</a></li>'
-         +'<li><a id="seo" href="/seo">SEO link</a></li>'
+      +'</nav>'
+      
+      +'<nav class="collapse navbar-collapse navbar-ex1-collapse col-md-8 col-sm-7">'
+      +'<ul class="nav nav-sidebar" id="side">'
+      +'<li><a href="/">Home</a></li>'
+      +'<li><a href="/dates">Date Calculator</a></li>'
+      +'<li><a href="/socket">Socket.io View</a></li>'
+      +'<li><a href="/seo">SEO link</a></li>'
+      +'<li id="signUp"><a href=""><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>'
+      +'<li id="logIn"><a href=""><span class="glyphicon glyphicon-log-in"></span> Login</a></li>'
       +'</ul>'
-   +'</div>'
-   +'</nav>'
-             + '<section id="content-main">Feature Content Region</section>'
-      	+ '<section id="content-dates"></section>'
-	    + '<section id="content-socket"></section>'
-	    + '<section id="content-seo"></section>'
-+'</main>'
+      +'</nav>'
       
+      +'<section id="content-main">Feature Content Region</section>'
+      +'<section id="content-dates"></section>'
+      +'<section id="content-socket"></section>'
+      +'<section id="content-seo"></section>'
+      +'</main>'
       
-      /*+'<main>'
-      + '<nav class="navbar navbar-default " id="topNav">'
-          + '<a class="navbar-brand" href="/">SPA Demo</a></nav>'
-        + '<nav id="side" class="navbar navbar-default">'
-        //+ '<h3>Nav Region</h3>'
-        + '<ul class="nav nav-sidebar">'
-      	  + '<li><a href="/">Home</a></li>'
-          + '<li><a id="date" href="/dates">Date calculator</a></li>'
-	      + '<li><a id="socket" href="/socket">Socket.io View</a></li>'
-	      + '<li><a id="seo" href="/seo">SEO link</a></li>'
 
-	    + '</ul></nav>'
-        + '<section id="content-main">Feature Content Region</section>'
-      	+ '<section id="content-dates"></section>'
-	    + '<section id="content-socket"></section>'
-	    + '<section id="content-seo"></section>'
-	+ '</main>'*/
     },
     stateMap = {
+      // View state information
       $container  : undefined,
     },
+
     jqueryMap = {},
 
     initModule, setJqueryMap,
-    currentMod;    
+    currentMod;
+
   //----------------- END MODULE SCOPE VARIABLES ---------------
 
-  //------------------- BEGIN UTILITY METHODS ------------------
-  //-------------------- END UTILITY METHODS -------------------
 
   //--------------------- BEGIN DOM METHODS --------------------
   // Begin DOM method /setJqueryMap/
@@ -101,6 +86,7 @@ spa.shell = (function () {
     }
 
   // One function per feature module
+  // Demo two views in same module
   function dates() { 
     // Don't be bad if user keeps clicking same menu choice
     if( currentMod != jqueryMap.$dates ) 
@@ -110,27 +96,27 @@ spa.shell = (function () {
     spa.dates.postSection();
     }
 
+  // socket.io uses websockets for client-server data exchange
   function socket() {
     if( currentMod != jqueryMap.$socket )
       currentMod.hide();
     currentMod = jqueryMap.$socket
-    // This changes once Nathan is ready 
-    spa.socket.initModule(jqueryMap.$socket);
+    spa.socket.postSection();
     }
 
+  // Page crawling when there are no pages
   function seo() {
     if( currentMod != jqueryMap.$seo )
       currentMod.hide()
     currentMod = jqueryMap.$seo;
     // Nothing going on here yet
     }
+  
+
 
   // End DOM client-side router methods
 
   //--------------------- END DOM METHODS ----------------------
-
-  //------------------- BEGIN EVENT HANDLERS -------------------
-  //-------------------- END EVENT HANDLERS --------------------
 
   //------------------- BEGIN PUBLIC METHODS -------------------
 
@@ -147,16 +133,11 @@ spa.shell = (function () {
     spa.dates.initModule(jqueryMap.$dates);
     jqueryMap.$socket.hide();
     jqueryMap.$seo.hide();
-    // spa.socket.initModule(jqueryMap.$socket);
+    spa.socket.initModule(jqueryMap.$socket);
     // spa.seo.initModule(jqueryMap.$seo);
 
     // Default content is "home" screen
     currentMod = jqueryMap.$content;
-    
-$('.nav li a').on('click', function() {
-    $(this).parent().parent().find('.active').removeClass('active');
-    $(this).parent().addClass('active').css('font-weight', 'bold');
-});
 
     // Set up routes
     page('/', index);
@@ -164,6 +145,53 @@ $('.nav li a').on('click', function() {
     page('/socket', socket);
     page('/seo', seo);
     page();
+    
+/*        $(document).on("show.bs.collapse",".collapse" ,function() {
+  console.log('something happened');
+});*/
+    
+
+      $("#log").on("click", function () {
+        alert("Coming Soon");
+      });
+
+      $("#sign").on("click", function () {
+        alert("Coming Soon");
+      });
+      $("#logIn").on("click", function () {
+        alert("Coming Soon");
+      });
+
+      $("#signUp").on("click", function () {
+        alert("Coming Soon");
+      });
+
+
+      $("#signUp").hide();
+      $("#logIn").hide();
+
+      if ($(window).width() <= 770) {
+        $("#logs").hide();
+        $("#signUp").show();
+        $("#logIn").show();
+      }
+
+
+      $(window).resize(function () {
+        var win = $(this);
+        if (win.width() <= 770) {
+          console.log('small');
+          $("#logs").hide();
+          $("#signUp").show();
+          $("#logIn").show();
+        } else {
+          $("#logs").show();
+          $("#signUp").hide();
+          $("#logIn").hide();
+        }
+      });
+    
+
 
   };
 
