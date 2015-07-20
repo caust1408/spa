@@ -134,7 +134,7 @@ spa.shell = (function () {
     jqueryMap.$socket.hide();
     jqueryMap.$seo.hide();
     spa.socket.initModule(jqueryMap.$socket);
-    // spa.seo.initModule(jqueryMap.$seo);
+    spa.seo.initModule(jqueryMap.$seo);
 
     // Default content is "home" screen
     currentMod = jqueryMap.$content;
