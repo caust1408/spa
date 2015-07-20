@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: /home/OSCON/AUSTGEN/spa/js/spa.dates.js
+Disallow: /home/OSCON/AUSTGEN/spa/js/spa.shell.js
