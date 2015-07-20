@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: /home/OSCON/AUSTGEN/spa/index.html
+Disallow: /
